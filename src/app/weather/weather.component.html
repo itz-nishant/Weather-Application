@@ -1,0 +1,24 @@
+<div class="weather-container">
+    <h2>Weather App</h2>
+    <div class="search-container">
+      <form [formGroup]="weatherForm" (ngSubmit)="searchWeather()">
+        <input type="text" formControlName="cityName" placeholder="Enter city name">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  
+    <div class="loading" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+  
+    <div class="result-container" *ngIf="weatherData">
+      <h3>{{ weatherData.name }}</h3>
+      <div class="temperature">{{ weatherData.main.temp }}°C</div>
+      <div class="description">{{ weatherData.weather[0].description }}</div>
+      <img [src]="getWeatherIconUrl(weatherData.weather[0].icon)" alt="Weather Icon">
+    </div>
+  
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+  
